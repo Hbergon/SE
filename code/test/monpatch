@@ -1,0 +1,9 @@
+Index: halt.c
+===================================================================
+--- halt.c	(révision 1)
++++ halt.c	(copie de travail)
+@@ -20,3 +20,4 @@
+     /* not reached */
+     return 0;
+ }
++/* test comment */
