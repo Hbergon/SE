@@ -6,7 +6,6 @@
 
 
 
-
 struct structsc
 {
 int a; 
@@ -21,6 +20,8 @@ static  void StartUserThread(void*schmurtz){
 
     for (i = 0; i < NumTotalRegs; i++)
 	machine->WriteRegister (i, 0);
+
+
 
     // Initial program counter -- must be location of "Start"
     machine->WriteRegister (PCReg, sch->a);
@@ -54,11 +55,11 @@ static  void StartUserThread(void*schmurtz){
 
     struct structsc * schmurtz;
 
-    schmurtz->a = f; //essayer fleches
+    schmurtz->a = f; 
     schmurtz->b = arg;
 
 
-     nt->Start(StartUserThread, (void*) schmurtz);
+     nt->Start(StartUserThread, (void*) schmurtz );
 
 
 

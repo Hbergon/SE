@@ -123,28 +123,38 @@ main (int argc, char **argv)
 	  if (!strcmp (*argv, "-x"))
 	    {			// run a user program
 		ASSERT (argc > 1);
-		consoledriver = new ConsoleDriver(NULL, NULL);
+		#ifdef CHANGED
+		consoledriver = new ConsoleDriver(NULL,NULL);
+		#endif //CHANGED
 		StartProcess (*(argv + 1));
 		argCount = 2;
 	    }
-	  else{
-		if (!strcmp (*argv, "-c"))
+	  else if (!strcmp (*argv, "-c"))
 	    {			// test the console
-			if (argc == 1)
-				ConsoleTest (NULL, NULL);
-			else
-			{
-				ASSERT (argc > 2);
-				ConsoleTest (*(argv + 1), *(argv + 2));
-				argCount = 3;
-			}
+		if (argc == 1)
+		    ConsoleTest (NULL, NULL);
+		else
+		  {
+		      ASSERT (argc > 2);
+		      ConsoleTest (*(argv + 1), *(argv + 2));
+		      argCount = 3;
+		  }
 	    }
-		if (!strcmp (*argv, "-sc"))
-			ASSERT (argc > 2);
-			printf ("ah52\n");
-			ConsoleDriverTest (*(argv + 1), *(argv + 2));
-			argCount = 3;
-	  } 
+			//Partie 3.3
+		#ifdef CHANGED
+		else if (!strcmp(*argv,"-sc"))
+		{
+			if (argc == 1)
+		    	ConsoleDriverTest (NULL, NULL);
+		else
+		  {
+		      ASSERT (argc > 2);
+		      ConsoleDriverTest (*(argv + 1), *(argv + 2));
+		      argCount = 3;
+		  }
+	    
+		#endif //CHANGED
+		}
 #endif // USER_PROGRAM
 #ifdef FILESYS
 	  if (!strcmp (*argv, "-cp"))
