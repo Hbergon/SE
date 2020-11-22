@@ -12,7 +12,9 @@ int a;
 int b;
 };
 
-static  void StartUserThread(void*schmurtz){
+static void StartUserThread(void*schmurtz){
+
+    
 
     int i;
 
@@ -35,14 +37,14 @@ static  void StartUserThread(void*schmurtz){
     // accidentally reference off the end!
     int tmp = AllocateUserStack();
     machine->WriteRegister (StackReg, tmp  );
-    DEBUG ('a', "Initializing stack register to 0x%x\n",
+    DEBUG ('x', "Initializing stack register to 0x%x\n",
 	   tmp);
 
 
 
     machine->WriteRegister (4, sch->b);
 
-     machine->Run();
+    machine->Run();
  }
 
 
@@ -50,19 +52,21 @@ static  void StartUserThread(void*schmurtz){
 
  int do_ThreadCreate(int f,int arg){
 
+ 
+
      Thread * nt = new Thread("newThread");
+     
 
 
-    struct structsc * schmurtz;
+    struct structsc *ptr, schmurtz;
 
-    schmurtz->a = f; 
-    schmurtz->b = arg;
+    ptr = &schmurtz;
 
-
-     nt->Start(StartUserThread, (void*) schmurtz );
-
+    ptr->a = f; 
+    ptr->b = arg;
 
 
+    nt->Start(StartUserThread, (void*) ptr );
 
 
      return 0;

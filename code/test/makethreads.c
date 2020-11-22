@@ -1,10 +1,10 @@
 #include "syscall.h"
 
-void fonc(char n){
+void start_t(char n){
 
-    char * c = "bonjour je suis un thread ";
+    char * c = "je suis un thread ";
     int i;
-    for(i=0;i<n;i++){
+    for(i=0;i<18;i++){
         PutChar(c[i]);
         }
     PutChar(n);
@@ -13,10 +13,11 @@ void fonc(char n){
 }
 
 int main(){
-    PutChar('\n');
-    char c = '7';
-    void f(void *) = fonc;
-    ThreadCreate(f, &c);
+    char ch1= '7';
+    int value = (int) &start_t;
+    ThreadCreate(value, &ch1);
     Halt();
 
 }
+
+
