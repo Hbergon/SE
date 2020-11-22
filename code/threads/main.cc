@@ -141,6 +141,7 @@ main (int argc, char **argv)
 	    }
 		if (!strcmp (*argv, "-sc"))
 			ASSERT (argc > 2);
+			printf ("ah52\n");
 			ConsoleDriverTest (*(argv + 1), *(argv + 2));
 			argCount = 3;
 	  } 
