@@ -152,7 +152,6 @@ main (int argc, char **argv)
 		      ConsoleDriverTest (*(argv + 1), *(argv + 2));
 		      argCount = 3;
 		  }
-	    
 		#endif //CHANGED
 		}
 #endif // USER_PROGRAM

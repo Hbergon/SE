@@ -1,9 +1,9 @@
 class PageProvider{
     PageProvider();
 
-    GetEmptyPage();
+    int GetEmptyPage();
 
-    ReleasePage();
+    int ReleasePage();
 
-    NumAvailPage();
+    int NumAvailPage();
 };

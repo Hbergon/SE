@@ -21,6 +21,11 @@
 
 #define UserStacksAreaSize		1024	// increase this as necessary!
 
+
+/*static void ReadAtVirtual(OpenFile *executable, int virtualaddr,
+int numBytes, int position, TranslationEntry *pageTable,
+unsigned numPages);*/
+
 class AddrSpace:dontcopythis
 {
   public:
@@ -52,8 +57,5 @@ extern List AddrspaceList;
 
 int AllocateUserStack();
 
-static void ReadAtVirtual(OpenFile *executable, int virtualaddr,
-int numBytes, int position, TranslationEntry *pageTable,
-unsigned numPages);
 
 #endif // ADDRSPACE_H
