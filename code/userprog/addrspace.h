@@ -52,4 +52,8 @@ extern List AddrspaceList;
 
 int AllocateUserStack();
 
+static void ReadAtVirtual(OpenFile *executable, int virtualaddr,
+int numBytes, int position, TranslationEntry *pageTable,
+unsigned numPages);
+
 #endif // ADDRSPACE_H

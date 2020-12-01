@@ -132,20 +132,20 @@ ExceptionHandler (ExceptionType which)
 
 		case SC_ThreadCreate :
 		{
-			int param1 = machine->ReadRegister (4);
+			int param1 = machine->ReadRegister (4); //lis les 2 parametres dans r4 et r5
 			int param2 = machine->ReadRegister (5);
 			DEBUG ('s', "ThreadCreate.\n");
 			int success;
-			success = do_ThreadCreate(param1, param2);
-			machine->WriteRegister(2, success);
+			success = do_ThreadCreate(param1, param2); //lance le traitant
+			machine->WriteRegister(2, success); //renvoie le résultat de l'appel systeme
 			break;
 
 		}
 
 		case SC_ThreadExit :
 		{
-			int success = do_ThreadExit();
-			machine->WriteRegister(2, success);
+			int success = do_ThreadExit(); //lance le traitant
+			machine->WriteRegister(2, success); //renvoie le résultat de l'appel systeme
 			break;
 		}
 

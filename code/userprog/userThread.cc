@@ -6,7 +6,7 @@
 
 
 
-struct structsc
+struct structsc //utilisé pour passer 2 argument en 1 à StartUserThread
 {
 int a; 
 int b;
@@ -23,7 +23,7 @@ static void StartUserThread(void*schmurtz){
     for (i = 0; i < NumTotalRegs; i++)
 	machine->WriteRegister (i, 0);
 
-
+    //initilaisation du PC à l'adresse de la première fonction a executée et du stack pointer du nouveau thread à debut de l'espace alloué
 
     // Initial program counter -- must be location of "Start"
     machine->WriteRegister (PCReg, sch->a);
@@ -40,7 +40,7 @@ static void StartUserThread(void*schmurtz){
     DEBUG ('x', "Initializing stack register to 0x%x\n",
 	   tmp);
 
-
+    //mise du parmatre de la première fonction à etre executée dans le registre 4
 
     machine->WriteRegister (4, sch->b);
 
@@ -58,12 +58,15 @@ static void StartUserThread(void*schmurtz){
      
 
 
-    struct structsc *ptr, schmurtz;
+    struct structsc *ptr, schmurtz; 
 
     ptr = &schmurtz;
 
     ptr->a = f; 
     ptr->b = arg;
+
+     DEBUG ('x', "start thread with param : 0x%x, 0x%x\n",
+	   ptr->b,ptr->a);
 
 
     nt->Start(StartUserThread, (void*) ptr );
