@@ -18,6 +18,9 @@
 #include "translate.h"
 #include "noff.h"
 #include "list.h"
+#ifdef CHANGED
+#include "bitmap.h"
+#endif
 
 #define UserStacksAreaSize		1024	// increase this as necessary!
 

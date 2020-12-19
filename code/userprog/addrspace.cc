@@ -21,6 +21,9 @@
 #include "noff.h"
 #include "syscall.h"
 #include "new"
+#ifdef CHANGED
+#include "bitmap.h"
+#endif
 
 //----------------------------------------------------------------------
 // SwapHeader
@@ -131,7 +134,7 @@ AddrSpace::AddrSpace (OpenFile * executable)
     pageTable = new TranslationEntry[numPages];
     for (i = 0; i < numPages; i++)
       {
-	  pageTable[i].physicalPage = i + 1;	// for now, phys page # = virtual page #
+	  pageTable[i].physicalPage = pageProvider->GetEmptyPage();	// for now, phys page # = virtual page #
 	  pageTable[i].valid = TRUE;
 	  pageTable[i].use = FALSE;
 	  pageTable[i].dirty = FALSE;
@@ -177,7 +180,9 @@ AddrSpace::~AddrSpace ()
 {
   delete [] pageTable;
   pageTable = NULL;
-
+  for (int i = 0; i < numPages; i++){        
+      pageProvider->ReleasePage(pageTable[i].physicalPage);
+  }
   AddrSpaceList.Remove(this);
 }
 

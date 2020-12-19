@@ -42,9 +42,10 @@ PostOffice *postOffice;
 #ifdef CHANGED
 #ifdef USER_PROGRAM
 ConsoleDriver *consoledriver;
-#endif
-#endif
 
+PageProvider *pageProvider;
+#endif
+#endif //CHANGED
 
 // External definition, to allow us to take a pointer to this function
 extern void Cleanup ();
@@ -186,6 +187,12 @@ Initialize (int argc, char **argv)
     machine = new Machine (debugUserProg);	// this must come first
 #endif
 
+#ifdef CHANGED
+#ifdef PAGE_PROVIDER
+    pageProvider = new PageProvider();
+#endif
+#endif //CHANGED
+
 #ifdef FILESYS
     synchDisk = new SynchDisk ("DISK");
 #endif
@@ -222,6 +229,13 @@ Cleanup ()
     delete machine;
     machine = NULL;
 #endif
+
+#ifdef CHANGED
+#ifdef PAGE_PROVIDER
+    delete pageProvider;
+    pageProvider = NULL;
+#endif
+#endif //CHANGED
 
 #ifdef FILESYS_NEEDED
     delete fileSystem;
