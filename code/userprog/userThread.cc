@@ -51,13 +51,7 @@ static void StartUserThread(void*schmurtz){
 
 
  int do_ThreadCreate(int f,int arg){
-
- 
-
-     Thread * nt = new Thread("newThread");
-     
-
-
+    Thread * nt = new Thread("newThread");
     struct structsc *ptr, schmurtz; 
 
     ptr = &schmurtz;
@@ -65,19 +59,46 @@ static void StartUserThread(void*schmurtz){
     ptr->a = f; 
     ptr->b = arg;
 
-     DEBUG ('x', "start thread with param : 0x%x, 0x%x\n",
-	   ptr->b,ptr->a);
-
+    DEBUG ('x', "start thread with param : 0x%x, 0x%x\n",ptr->b,ptr->a);
 
     nt->Start(StartUserThread, (void*) ptr );
 
-
-     return 0;
+    return 0;
  }
 
  
 
  int do_ThreadExit(){
     currentThread->Finish();
+    return 0;
+ }
+
+
+ static void StartUserProc(void * arg){
+    int i;
+    for (i = 0; i < NumTotalRegs; i++)
+	   machine->WriteRegister (i, 0);
+
+    machine->WriteRegister (PCReg, 0);
+
+    machine->WriteRegister (NextPCReg, machine->ReadRegister(PCReg) + 4);
+
+    int tmp = AllocateUserStack();
+    machine->WriteRegister (StackReg, tmp  );
+    DEBUG ('x', "Initializing stack register to 0x%x\n",
+	   tmp);
+
+    machine->Run();
+ }
+
+
+
+ int do_ForkExec(const char *  s){
+    Thread * nt = new Thread("newThread");
+
+    nt->space = new AddrSpace( new OpenFile((int) (long) s)) ;
+
+    nt->Start(StartUserProc, NULL); //pas de param encoreS
+
     return 0;
  } 

@@ -6,3 +6,7 @@ extern int do_ThreadCreate(int f,int arg); //traitant de l'appel system, créant
 static void StartUserThread(void*schmurtz); //initialisation du nouveau thread(préparation des registres)
 
 extern int  do_ThreadExit();//fini le thread courant
+
+extern int do_ForkExec(const char *  s);
+
+ static void StartUserProc(void * arg);

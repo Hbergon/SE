@@ -149,6 +149,23 @@ ExceptionHandler (ExceptionType which)
 			break;
 		}
 
+		case SC_ForkExec :
+		{
+			int param1 = machine->ReadRegister (4);  //trouver moyen de convertir int-> char *
+			DEBUG ('s', "SC_ForkExec.\n");
+			int success = do_ForkExec( (char * ) (long) param1); 
+			machine->WriteRegister(2, success); 
+			break;
+		}
+
+		case SC_Exit:
+		  {
+		    DEBUG ('s', "exit.\n");
+		    currentThread->Finish();
+		    break;
+		  }
+
+
 		#endif
 		default:
 		  {

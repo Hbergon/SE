@@ -11,6 +11,10 @@ void print(char c, int n){
 
 int main(){
     print('a',4);
+    //ForkExec("putchar.c");
+    while(1){
+
+    }
     Halt();
 
 }
